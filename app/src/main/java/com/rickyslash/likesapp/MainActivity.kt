@@ -49,16 +49,20 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    // draw face's shape
     private fun showFace() {
         val face = RectF(left, top, right, bottom)
-
+        // sets color of mPaint
         mPaint.color = ResourcesCompat.getColor(resources, R.color.yellow_left_skin, null)
+        // drawArc draws an arc inside RectF bounds
+        // drawArc 0 degree starts at 3 o'clock
         mCanvas.drawArc(face, 90F, 180F, false, mPaint)
 
         mPaint.color = ResourcesCompat.getColor(resources, R.color.yellow_right_skin, null)
         mCanvas.drawArc(face, 270F, 180F, false, mPaint)
     }
 
+    // draws eyes
     private fun showEyes() {
         mPaint.color = ResourcesCompat.getColor(resources, R.color.black, null)
         mCanvas.drawCircle(halfOfWidth - 100F, halfOfHeight - 10F, 50F, mPaint)
@@ -69,6 +73,7 @@ class MainActivity : AppCompatActivity() {
         mCanvas.drawCircle(halfOfWidth + 80F, halfOfHeight - 20F, 15F, mPaint)
     }
 
+    // draws mouth
     private fun showMouth(isHappy: Boolean) {
         when (isHappy) {
             true -> {
@@ -98,9 +103,11 @@ class MainActivity : AppCompatActivity() {
             color = ResourcesCompat.getColor(resources, R.color.yellow_right_skin, null)
         }
 
+        // storing bounds of the text
         val mBounds = Rect()
         mPaintText.getTextBounds(message, 0, message.length, mBounds)
 
+        // place text on the center & draws
         val x: Float = (halfOfWidth - mBounds.centerX())
         val y = 50F
         mCanvas.drawText(message, x, y, mPaintText)
